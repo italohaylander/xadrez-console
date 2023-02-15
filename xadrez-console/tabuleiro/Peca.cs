@@ -8,7 +8,7 @@ using tabuleiro;
 
 namespace tabuleiro
 {
-     class Peca
+     abstract class Peca
     {
       
 
@@ -31,5 +31,6 @@ namespace tabuleiro
         public void IncrementarQuantidadeMovimento() { 
             QuantidadeMovimentos++;
         }
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
