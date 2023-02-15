@@ -10,8 +10,8 @@ namespace xadrez
      class PartidaDeXadrez
     {
         public Tabuleiro Tab { get; private set; }
-        private int Turno;
-        private Cor JogadorAtual;
+        public int Turno { get; private set; }
+        public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
        
         public PartidaDeXadrez()
@@ -19,6 +19,7 @@ namespace xadrez
             Tab = new Tabuleiro(8,8);
             Turno = 1;
             JogadorAtual = Cor.Branca;
+            Terminada = false;
             ColocarPecas();
         }
         public void ExecutaMoviemnto(Posicao origem,Posicao destino)
@@ -29,6 +30,49 @@ namespace xadrez
             Tab.ColocarPeca(p, destino);
         }
 
+        public void RealizaJogada(Posicao origem,Posicao destino)
+        {
+            ExecutaMoviemnto(origem,destino);
+            Turno++;
+            MudaJogador();
+
+        }
+
+        public void ValidarPosicaoDeOrigem(Posicao posicao)
+        {
+            if(Tab.Peca(posicao) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if( JogadorAtual != Tab.Peca(posicao).Cor)
+            {
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+
+            }
+            if (!Tab.Peca(posicao).ExisteMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não há movimento possiveis para a peça de origem escolhida");
+            }
+        }
+
+        public void ValidarPosicaoDeDestino(Posicao origem,Posicao destinho)
+        {
+            if (!Tab.Peca(origem).PodeMoverPara(origem))
+            {
+                throw new TabuleiroException("Posição de destino inválida!!!");
+            }
+        }
+        private void MudaJogador()
+        {
+            if (JogadorAtual == Cor.Branca)
+            {
+                JogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                JogadorAtual = Cor.Branca;
+            }
+        }   
         private void ColocarPecas()
         {
             Tab.ColocarPeca(new Torre(Tab, Cor.Preta), new PosicaoXadrez('c', 1).ToPosicao());
