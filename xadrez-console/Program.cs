@@ -6,6 +6,15 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
+
+
+            PosicaoXadrez p1 = new PosicaoXadrez('c', 7);
+
+            Console.WriteLine(p1);
+
+            Console.WriteLine(p1.ToPosicao());
+            
+            
             try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
