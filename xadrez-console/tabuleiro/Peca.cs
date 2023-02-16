@@ -31,6 +31,10 @@ namespace tabuleiro
         public void IncrementarQuantidadeMovimento() { 
             QuantidadeMovimentos++;
         }
+        public void DecrementarQuantidadeMovimento()
+        {
+            QuantidadeMovimentos--;
+        }
 
         public bool ExisteMovimentosPossiveis()
         {
