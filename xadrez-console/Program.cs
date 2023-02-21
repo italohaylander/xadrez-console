@@ -38,7 +38,7 @@ namespace xadrez_console
                         Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
 
                         Console.WriteLine();
-                        Console.Write("Destinho:");
+                        Console.Write("Destino:");
                         Posicao destinho = Tela.LerPosicaoXadrez().ToPosicao();
 
                         partida.ValidarPosicaoDeDestino(origem, destinho);
